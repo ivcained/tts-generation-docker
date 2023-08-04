@@ -74,7 +74,7 @@ RUN source /venv/bin/activate && \
     pip3 install -r requirements.txt && \
     pip3 install -r requirements_audiocraft.txt && \
     pip3 install -r requirements_bark_hubert_quantizer.txt && \
-    pip3 install -r requirements_rvc && \
+    pip3 install -r requirements_rvc.txt && \
     deactivate
 
 # Copy configuration files
