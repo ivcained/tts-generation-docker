@@ -21,6 +21,7 @@ RUN apt update && \
         python3.10-venv \
         python3-pip \
         python3-tk \
+        python3-dev \
         nginx \
         bash \
         git \
