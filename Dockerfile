@@ -17,6 +17,7 @@ RUN apt update && \
     apt -y upgrade && \
     apt install -y --no-install-recommends \
         software-properties-common \
+        build-essential \
         python3.10-venv \
         python3-pip \
         python3-tk \
