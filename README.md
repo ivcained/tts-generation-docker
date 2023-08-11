@@ -14,7 +14,7 @@
 
 This image is designed to work on [RunPod](https://runpod.io?ref=2xxro4sy).
 You can use my custom [RunPod template](
-https://runpod.io/gsc?template=43itqiwygf&ref=2xxro4sy)
+https://runpod.io/gsc?template=j898rhd8t6&ref=2xxro4sy)
 to launch it on RunPod.
 
 ## Community and Contributing
