@@ -57,7 +57,7 @@ RUN ln -s /usr/bin/python3.10 /usr/bin/python
 
 # Install Torch and xformers
 RUN pip3 install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 && \
-    pip3 install --no-cache-dir xformers
+    pip3 install --no-cache-dir xformers==0.0.19
 
 # Stage 2: Install Web UI and python modules
 FROM base as setup
