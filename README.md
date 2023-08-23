@@ -8,7 +8,7 @@
 * [TTS Generation Web UI](
   https://github.com/rsxdalv/tts-generation-webui)
 * Torch 2.0.1
-* xformers 0.0.20
+* xformers 0.0.19
 
 ## Available on RunPod
 

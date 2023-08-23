@@ -70,13 +70,12 @@ RUN git clone https://github.com/rsxdalv/tts-generation-webui.git && \
 # Install the dependencies for Audiocraft
 WORKDIR /tts-generation-webui
 RUN source /venv/bin/activate && \
-    pip3 install --no-cache-dir torch torchaudio --index-url https://download.pytorch.org/whl/cu118 && \
-    pip3 install --no-cache-dir xformers==0.0.19 && \
     pip3 install -r requirements.txt && \
     pip3 install -r requirements_audiocraft.txt && \
     pip3 install -r requirements_bark_hubert_quantizer.txt && \
     pip3 install -r requirements_rvc.txt && \
-    pip3 install --no-cache-dir torchvision --index-url https://download.pytorch.org/whl/cu118 && \
+    pip3 install --no-cache-dir torch torchaudio torchvision --index-url https://download.pytorch.org/whl/cu118 && \
+    pip3 cache purge && \
     deactivate
 
 # Copy configuration files
