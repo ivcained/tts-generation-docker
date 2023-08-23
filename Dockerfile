@@ -55,15 +55,11 @@ RUN apt update && \
 # Set Python
 RUN ln -s /usr/bin/python3.10 /usr/bin/python
 
-# Install Torch and xformers
-RUN pip3 install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 && \
-    pip3 install --no-cache-dir xformers==0.0.19
-
 # Stage 2: Install Web UI and python modules
 FROM base as setup
 
 # Create and use the Python venv
-RUN python3 -m venv --system-site-packages /venv
+RUN python3 -m venv /venv
 
 # Clone the git repo of Audiocraft and set version
 WORKDIR /
@@ -74,6 +70,8 @@ RUN git clone https://github.com/rsxdalv/tts-generation-webui.git && \
 # Install the dependencies for Audiocraft
 WORKDIR /tts-generation-webui
 RUN source /venv/bin/activate && \
+    pip3 install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 && \
+    pip3 install --no-cache-dir xformers==0.0.19 && \
     pip3 install -r requirements.txt && \
     pip3 install -r requirements_audiocraft.txt && \
     pip3 install -r requirements_bark_hubert_quantizer.txt && \
