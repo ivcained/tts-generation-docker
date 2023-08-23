@@ -1,7 +1,7 @@
 # Stage 1: Base
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 as base
 
-ARG TTS_COMMIT=758962313cd43af0eaa79b388db5421d79c0aef1
+ARG TTS_COMMIT=cf7a9a757b2fdba206399c8d63f7de6addcbb040
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -24,6 +24,7 @@ RUN apt update && \
         python3-dev \
         nginx \
         bash \
+        dos2unix \
         git \
         ncdu \
         net-tools \
@@ -58,7 +59,7 @@ RUN ln -s /usr/bin/python3.10 /usr/bin/python
 FROM base as setup
 
 # Create and use the Python venv
-RUN python3 -m venv /venv
+RUN python3 -m venv --system-site-packages /venv
 
 # Clone the git repo of Audiocraft and set version
 WORKDIR /
