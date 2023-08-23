@@ -76,7 +76,7 @@ RUN source /venv/bin/activate && \
     pip3 install -r requirements_audiocraft.txt && \
     pip3 install -r requirements_bark_hubert_quantizer.txt && \
     pip3 install -r requirements_rvc.txt && \
-    pip3 install -r torchvision --index-url https://download.pytorch.org/whl/cu118 && \
+    pip3 install --no-cache-dir torchvision --index-url https://download.pytorch.org/whl/cu118 && \
     deactivate
 
 # Copy configuration files
