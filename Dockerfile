@@ -95,8 +95,8 @@ RUN wget https://github.com/runpod/runpodctl/releases/download/v1.10.0/runpodctl
     mv runpodctl /usr/local/bin
 
 # NGINX Proxy
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY 502.html /usr/share/nginx/html/502.html
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx/502.html /usr/share/nginx/html/502.html
 
 # Set up the container startup script
 WORKDIR /
