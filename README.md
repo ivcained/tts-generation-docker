@@ -40,7 +40,7 @@ You can obviously substitute the image name and tag with your own.
 
 ## Community and Contributing
 
-Pull requests and issues on [GitHub](https://github.com/ashleykleynhans/audiocraft-docker)
+Pull requests and issues on [GitHub](https://github.com/ashleykleynhans/tts-generation-docker)
 are welcome. Bug fixes and new features are encouraged.
 
 You can contact me and get help with deploying your Serverless
