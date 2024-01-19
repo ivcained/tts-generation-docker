@@ -1,4 +1,4 @@
-# Docker image for TTS Generation Web UI (Bark, MusicGen + AudioGen, Tortoise, RVC, Vocos, Demucs)
+# Docker image for TTS Generation Web UI (Bark, MusicGen + AudioGen, Tortoise, RVC, Vocos, Demucs, SeamlessM4T, MAGNeT)
 
 ## Installs
 
@@ -7,8 +7,10 @@
 * Python 3.10.12
 * [TTS Generation Web UI](
   https://github.com/rsxdalv/tts-generation-webui)
-* Torch 2.0.1
-* xformers 0.0.19
+* Torch 2.1.2
+* [runpodctl](https://github.com/runpod/runpodctl)
+* [croc](https://github.com/schollz/croc)
+* [rclone](https://rclone.org/
 
 ## Available on RunPod
 
@@ -33,7 +35,7 @@ docker run -d \
   -p 3000:3001 \
   -p 8888:8888 \
   -e JUPYTER_PASSWORD=Jup1t3R! \
-  ashleykza/tts-generation:1.0.2
+  ashleykza/tts-generation:latest
 ```
 
 You can obviously substitute the image name and tag with your own.

@@ -1,7 +1,8 @@
 # Stage 1: Base
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 as base
 
-ARG TTS_COMMIT=bfdbf1a0761d44728f1404b69a21fc6d2613b378
+ARG TTS_COMMIT=10106b7e50ce8f97aa99d1cd1f7ac055ef150f50
+ARG TORCH_VERSION=2.1.2
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -70,12 +71,12 @@ RUN git clone https://github.com/rsxdalv/tts-generation-webui.git && \
 # Install the dependencies for Audiocraft
 WORKDIR /tts-generation-webui
 RUN source /venv/bin/activate && \
+    pip3 install --no-cache-dir torch==${TORCH_VERSION} torchaudio torchvision --index-url https://download.pytorch.org/whl/cu118 && \
     pip3 install -r requirements.txt && \
-    pip3 install -r requirements_audiocraft.txt && \
+    pip3 install -r requirements_audiocraft_only.txt --no-deps && \
+    pip3 install -r requirements_audiocraft_deps.txt && \
     pip3 install -r requirements_bark_hubert_quantizer.txt && \
     pip3 install -r requirements_rvc.txt && \
-    pip3 uninstall -y torch torchaudio torchvision && \
-    pip3 install --no-cache-dir torch torchaudio torchvision --index-url https://download.pytorch.org/whl/cu118 && \
     deactivate
 
 # Copy configuration files
@@ -89,10 +90,20 @@ RUN pip3 install -U --no-cache-dir jupyterlab \
         ipywidgets \
         gdown
 
+# Install rclone
+RUN curl https://rclone.org/install.sh | bash
+
 # Install runpodctl
 RUN wget https://github.com/runpod/runpodctl/releases/download/v1.10.0/runpodctl-linux-amd -O runpodctl && \
     chmod a+x runpodctl && \
     mv runpodctl /usr/local/bin
+
+# Install croc
+RUN curl https://getcroc.schollz.com | bash
+
+# Install speedtest CLI
+RUN curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | bash && \
+    apt install speedtest
 
 # Remove existing SSH host keys
 RUN rm -f /etc/ssh/ssh_host_*
@@ -107,5 +118,6 @@ WORKDIR /
 COPY --chmod=755 scripts/* ./
 
 # Start the container
+ENV TEMPLATE_VERSION=2.0.0
 SHELL ["/bin/bash", "--login", "-c"]
 CMD [ "/start.sh" ]
