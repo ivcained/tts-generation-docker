@@ -62,13 +62,13 @@ FROM base as setup
 # Create and use the Python venv
 RUN python3 -m venv /venv
 
-# Clone the git repo of Audiocraft and set version
+# Clone the git repo of TTS Generation WebUI and set version
 WORKDIR /
 RUN git clone https://github.com/rsxdalv/tts-generation-webui.git && \
     cd /tts-generation-webui && \
     git checkout ${TTS_COMMIT}
 
-# Install the dependencies for Audiocraft
+# Install the Python dependencies for TTS Generation WebUI
 WORKDIR /tts-generation-webui
 RUN source /venv/bin/activate && \
     pip3 install --no-cache-dir torch==${TORCH_VERSION} torchaudio torchvision --index-url https://download.pytorch.org/whl/cu118 && \
@@ -78,6 +78,14 @@ RUN source /venv/bin/activate && \
     pip3 install -r requirements_bark_hubert_quantizer.txt && \
     pip3 install -r requirements_rvc.txt && \
     deactivate
+
+# Install the NodeJS dependencies for the TTS Generation WebUI
+RUN curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh && \
+    bash nodesource_setup.sh && \
+    apt -y install nodejs && \
+    cd /tts-generation-webui/react-ui && \
+    npm install && \
+    npm run build
 
 # Copy configuration files
 COPY config.json /tts-generation-webui/config.json

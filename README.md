@@ -10,7 +10,7 @@
 * Torch 2.1.2
 * [runpodctl](https://github.com/runpod/runpodctl)
 * [croc](https://github.com/schollz/croc)
-* [rclone](https://rclone.org/
+* [rclone](https://rclone.org/)
 
 ## Available on RunPod
 
