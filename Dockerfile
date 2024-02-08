@@ -1,8 +1,8 @@
 # Stage 1: Base
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 as base
 
-ARG TTS_COMMIT=10106b7e50ce8f97aa99d1cd1f7ac055ef150f50
-ARG TORCH_VERSION=2.1.2
+ARG TTS_COMMIT=13e1a95525cfb0cefe8f16c7463d26327a3c05eb
+ARG TORCH_VERSION=2.2.0
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -100,7 +100,8 @@ RUN pip3 install -U --no-cache-dir jupyterlab \
         jupyterlab_widgets \
         ipykernel \
         ipywidgets \
-        gdown
+        gdown \
+        OhMyRunPod
 
 # Install rclone
 RUN curl https://rclone.org/install.sh | bash
@@ -130,6 +131,6 @@ WORKDIR /
 COPY --chmod=755 scripts/* ./
 
 # Start the container
-ENV TEMPLATE_VERSION=2.0.1
+ENV TEMPLATE_VERSION=2.0.2
 SHELL ["/bin/bash", "--login", "-c"]
 CMD [ "/start.sh" ]
