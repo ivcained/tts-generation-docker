@@ -2,7 +2,7 @@
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 as base
 
 ARG TTS_COMMIT=13e1a95525cfb0cefe8f16c7463d26327a3c05eb
-ARG TORCH_VERSION=2.2.0
+ARG TORCH_VERSION=2.0.0
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
