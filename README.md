@@ -7,7 +7,8 @@
 * Python 3.10.12
 * [TTS Generation Web UI](
   https://github.com/rsxdalv/tts-generation-webui)
-* Torch 2.1.2
+* Torch 2.0.0
+* xformers 0.0.19
 * [runpodctl](https://github.com/runpod/runpodctl)
 * [croc](https://github.com/schollz/croc)
 * [rclone](https://rclone.org/)
