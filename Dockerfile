@@ -95,7 +95,7 @@ RUN curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh && \
 COPY config.json /tts-generation-webui/config.json
 COPY .env /tts-generation-webui/.env
 
-# Install Jupyter
+# Install Jupyter, gdown and OhMyRunPod
 RUN pip3 install -U --no-cache-dir jupyterlab \
         jupyterlab_widgets \
         ipykernel \
@@ -103,11 +103,16 @@ RUN pip3 install -U --no-cache-dir jupyterlab \
         gdown \
         OhMyRunPod
 
+# Install RunPod File Uploader
+RUN curl -sSL https://github.com/kodxana/RunPod-FilleUploader/raw/main/scripts/installer.sh -o installer.sh && \
+    chmod +x installer.sh && \
+    ./installer.sh
+
 # Install rclone
 RUN curl https://rclone.org/install.sh | bash
 
 # Install runpodctl
-RUN wget https://github.com/runpod/runpodctl/releases/download/v1.10.0/runpodctl-linux-amd -O runpodctl && \
+RUN wget https://github.com/runpod/runpodctl/releases/download/v1.13.0/runpodctl-linux-amd64 -O runpodctl && \
     chmod a+x runpodctl && \
     mv runpodctl /usr/local/bin
 
@@ -125,12 +130,13 @@ RUN rm -f /etc/ssh/ssh_host_*
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/502.html /usr/share/nginx/html/502.html
 
-WORKDIR /
+# Set template version
+ENV TEMPLATE_VERSION=2.0.3
 
 # Copy the scripts
+WORKDIR /
 COPY --chmod=755 scripts/* ./
 
 # Start the container
-ENV TEMPLATE_VERSION=2.0.2
 SHELL ["/bin/bash", "--login", "-c"]
 CMD [ "/start.sh" ]
