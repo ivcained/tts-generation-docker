@@ -81,6 +81,7 @@ RUN source /venv/bin/activate && \
     pip3 install -r requirements_audiocraft_deps.txt && \
     pip3 install -r requirements_bark_hubert_quantizer.txt && \
     pip3 install -r requirements_rvc.txt && \
+    pip3 install hydra-core==1.3.2 && \
     deactivate
 
 # Install the NodeJS dependencies for the TTS Generation WebUI
@@ -131,7 +132,7 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/502.html /usr/share/nginx/html/502.html
 
 # Set template version
-ENV TEMPLATE_VERSION=2.0.3
+ENV TEMPLATE_VERSION=2.0.4
 
 # Copy the scripts
 WORKDIR /
