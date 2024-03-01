@@ -39,7 +39,7 @@ docker run -d \
   -p 3000:3001 \
   -p 8888:8888 \
   -p 2999:2999 \
-  -e JUPYTER_PASSWORD=Jup1t3R! \
+  -e VENV_PATH="/workspace/venvs/tts-generation-webui" \
   ashleykza/tts-generation:latest
 ```
 
@@ -55,10 +55,10 @@ You can obviously substitute the image name and tag with your own.
 
 ### Environment Variables
 
-| Variable           | Description                                                | Default   |
-|--------------------|------------------------------------------------------------|-----------|
-| JUPYTER_PASSWORD   | Password for Jupyter Lab                                   | Jup1t3R!  |
-| DISABLE_AUTOLAUNCH | Disable TTS Generation Web UI from launching automatically | (not set) |
+| Variable           | Description                                                | Default                               |
+|--------------------|------------------------------------------------------------|---------------------------------------|
+| VENV_PATH          | Set the path for the Python venv for the app               | /workspace/venvs/tts-generation-webui |
+| DISABLE_AUTOLAUNCH | Disable TTS Generation Web UI from launching automatically | (not set)                             |
 
 ## Logs
 
