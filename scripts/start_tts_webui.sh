@@ -5,7 +5,7 @@ echo "Starting TTS Generation Web UI"
 export HF_HOME="/workspace"
 # Set port for the React UI
 export PORT=3006
-VENV_PATH=$(cat /workspace/SUPIR/venv_path)
+VENV_PATH=$(cat /workspace/tts-generation-webui/venv_path)
 source ${VENV_PATH}/bin/activate
 cd /workspace/tts-generation-webui
 nohup python3 server.py > /workspace/logs/tts.log 2>&1 &
