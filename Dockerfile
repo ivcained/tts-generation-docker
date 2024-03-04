@@ -1,7 +1,7 @@
 # Stage 1: Base
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 as base
 
-ARG TTS_COMMIT=13e1a95525cfb0cefe8f16c7463d26327a3c05eb
+ARG TTS_COMMIT=52d0a56f3a118b30e5e73d6564a4dd204b212c5b
 ARG TORCH_VERSION=2.0.0
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -132,7 +132,7 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/502.html /usr/share/nginx/html/502.html
 
 # Set template version
-ENV TEMPLATE_VERSION=2.0.5
+ENV TEMPLATE_VERSION=2.0.6
 
 # Set the venv path
 ENV VENV_PATH="/workspace/venvs/tts-generation-webui"
