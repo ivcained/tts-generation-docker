@@ -1,7 +1,7 @@
 # Stage 1: Base
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 as base
 
-ARG TTS_COMMIT=52d0a56f3a118b30e5e73d6564a4dd204b212c5b
+ARG TTS_COMMIT=4a95eb61921df8d176d74370e043799070e13d45
 ARG TORCH_VERSION=2.0.0
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -113,7 +113,8 @@ RUN curl -sSL https://github.com/kodxana/RunPod-FilleUploader/raw/main/scripts/i
 RUN curl https://rclone.org/install.sh | bash
 
 # Install runpodctl
-RUN wget https://github.com/runpod/runpodctl/releases/download/v1.13.0/runpodctl-linux-amd64 -O runpodctl && \
+ARG RUNPODCTL_VERSION="v1.14.2"
+RUN wget "https://github.com/runpod/runpodctl/releases/download/${RUNPODCTL_VERSION}/runpodctl-linux-amd64" -O runpodctl && \
     chmod a+x runpodctl && \
     mv runpodctl /usr/local/bin
 
@@ -132,7 +133,7 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/502.html /usr/share/nginx/html/502.html
 
 # Set template version
-ENV TEMPLATE_VERSION=2.0.6
+ENV TEMPLATE_VERSION=2.0.7
 
 # Set the venv path
 ENV VENV_PATH="/workspace/venvs/tts-generation-webui"
