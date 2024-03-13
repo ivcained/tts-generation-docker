@@ -21,7 +21,7 @@ target "default" {
         RELEASE = "${RELEASE}"
         INDEX_URL = "https://download.pytorch.org/whl/cu${CU_VERSION}"
         TORCH_VERSION = "2.0.0+cu${CU_VERSION}"
-        XFORMERS_VERSION = "0.0.19+cu${CU_VERSION}"
+        XFORMERS_VERSION = "0.0.19"
         TTS_COMMIT = "b8549c3d16f8b3545d72ef87f2f93a21e24e32c1"
         RUNPODCTL_VERSION = "v1.14.2"
         VENV_PATH = "/workspace/venvs/tts-generation-webui"

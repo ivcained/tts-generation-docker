@@ -74,7 +74,7 @@ ARG XFORMERS_VERSION
 WORKDIR /tts-generation-webui
 RUN source /venv/bin/activate && \
     pip3 install --no-cache-dir torch==${TORCH_VERSION} torchaudio torchvision --index-url ${INDEX_URL} && \
-    pip3 install --no-cache-dir xformers==${XFORMERS_VERSION} --index-url ${INDEX_URL} && \
+    pip3 install --no-cache-dir xformers==${XFORMERS_VERSION} && \
     pip3 install -r requirements.txt && \
     pip3 install -r requirements_audiocraft_only.txt --no-deps && \
     pip3 install -r requirements_audiocraft_deps.txt && \
