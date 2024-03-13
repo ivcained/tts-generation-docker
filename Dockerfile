@@ -1,17 +1,11 @@
 # Stage 1: Base
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 as base
 
-ARG TTS_COMMIT=b8549c3d16f8b3545d72ef87f2f93a21e24e32c1
-ARG TORCH_VERSION=2.0.0
-
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=on \
     SHELL=/bin/bash
-
-# Create workspace working directory
-WORKDIR /
 
 # Install Ubuntu packages
 RUN apt update && \
@@ -64,18 +58,23 @@ RUN ln -s /usr/bin/python3.10 /usr/bin/python
 FROM base as setup
 
 # Create and use the Python venv
+WORKDIR /
 RUN python3 -m venv /venv
 
 # Clone the git repo of TTS Generation WebUI and set version
-WORKDIR /
+ARG TTS_COMMIT
 RUN git clone https://github.com/rsxdalv/tts-generation-webui.git && \
     cd /tts-generation-webui && \
     git checkout ${TTS_COMMIT}
 
 # Install the Python dependencies for TTS Generation WebUI
+ARG INDEX_URL
+ARG TORCH_VERSION
+ARG XFORMERS_VERSION
 WORKDIR /tts-generation-webui
 RUN source /venv/bin/activate && \
-    pip3 install --no-cache-dir torch==${TORCH_VERSION} torchaudio torchvision --index-url https://download.pytorch.org/whl/cu118 && \
+    pip3 install --no-cache-dir torch==${TORCH_VERSION} torchaudio torchvision --index-url ${INDEX_URL} && \
+    pip3 install --no-cache-dir xformers==${XFORMERS_VERSION} --index-url ${INDEX_URL} && \
     pip3 install -r requirements.txt && \
     pip3 install -r requirements_audiocraft_only.txt --no-deps && \
     pip3 install -r requirements_audiocraft_deps.txt && \
@@ -113,7 +112,7 @@ RUN curl -sSL https://github.com/kodxana/RunPod-FilleUploader/raw/main/scripts/i
 RUN curl https://rclone.org/install.sh | bash
 
 # Install runpodctl
-ARG RUNPODCTL_VERSION="v1.14.2"
+ARG RUNPODCTL_VERSION
 RUN wget "https://github.com/runpod/runpodctl/releases/download/${RUNPODCTL_VERSION}/runpodctl-linux-amd64" -O runpodctl && \
     chmod a+x runpodctl && \
     mv runpodctl /usr/local/bin
@@ -133,10 +132,12 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/502.html /usr/share/nginx/html/502.html
 
 # Set template version
-ENV TEMPLATE_VERSION=2.0.8
+ARG RELEASE
+ENV TEMPLATE_VERSION=${RELEASE}
 
 # Set the venv path
-ENV VENV_PATH="/workspace/venvs/tts-generation-webui"
+ARG VENV_PATH
+ENV VENV_PATH=${VENV_PATH}
 
 # Copy the scripts
 WORKDIR /
