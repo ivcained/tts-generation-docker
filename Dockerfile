@@ -81,6 +81,8 @@ RUN source /venv/bin/activate && \
     pip3 install -r requirements_bark_hubert_quantizer.txt && \
     pip3 install -r requirements_rvc.txt && \
     pip3 install hydra-core==1.3.2 && \
+    pip3 install -r requirements_styletts2.txt && \
+    pip3 install -r requirements_vall_e.txt && \
     deactivate
 
 # Install the NodeJS dependencies for the TTS Generation WebUI

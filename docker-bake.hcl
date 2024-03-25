@@ -7,7 +7,7 @@ variable "APP" {
 }
 
 variable "RELEASE" {
-    default = "2.0.10"
+    default = "2.0.11"
 }
 
 variable "CU_VERSION" {
@@ -22,7 +22,7 @@ target "default" {
         INDEX_URL = "https://download.pytorch.org/whl/cu${CU_VERSION}"
         TORCH_VERSION = "2.0.0+cu${CU_VERSION}"
         XFORMERS_VERSION = "0.0.19"
-        TTS_COMMIT = "c71e1a796f41af17392b64d5c70926288c238231"
+        TTS_COMMIT = "af94b041f1895dc9ab145db828447232290f4bbe"
         RUNPODCTL_VERSION = "v1.14.2"
         VENV_PATH = "/workspace/venvs/tts-generation-webui"
     }
