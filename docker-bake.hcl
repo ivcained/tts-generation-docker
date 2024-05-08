@@ -31,7 +31,7 @@ variable "CUDA_VERSION" {
 }
 
 variable "TORCH_VERSION" {
-    default = "2.1.2"
+    default = "2.0.0"
 }
 
 target "default" {
@@ -41,7 +41,7 @@ target "default" {
         RELEASE = "${RELEASE}"
         BASE_IMAGE = "${BASE_IMAGE_REPOSITORY}:${BASE_IMAGE_VERSION}-cuda${CUDA_VERSION}-torch${TORCH_VERSION}"
         INDEX_URL = "https://download.pytorch.org/whl/cu${CU_VERSION}"
-        TORCH_VERSION = "2.0.0+cu${CU_VERSION}"
+        TORCH_VERSION = "${TORCH_VERSION}+cu${CU_VERSION}"
         XFORMERS_VERSION = "0.0.19"
         TTS_COMMIT = "8792ce96717a879b26dfc62ced21c9c95a653853"
         VENV_PATH = "/workspace/venvs/tts-generation-webui"
