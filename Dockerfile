@@ -8,7 +8,9 @@ ENV DEBIAN_FRONTEND=noninteractive \
     SHELL=/bin/bash
 
 # Create and use the Python venv
-RUN python3 -m venv --system-site-packages /venv
+# No --system-site-packages used here because it creates issues with
+# packages not being found.
+RUN python3 -m venv /venv
 
 # Clone the git repo of TTS Generation WebUI and set version
 ARG TTS_COMMIT
