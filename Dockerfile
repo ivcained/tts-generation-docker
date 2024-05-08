@@ -38,6 +38,7 @@ RUN source /venv/bin/activate && \
     deactivate
 
 # Install the NodeJS dependencies for the TTS Generation WebUI
+RUN apt -y purge nodejs libnode*
 RUN curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh && \
     bash nodesource_setup.sh && \
     apt -y install nodejs && \
