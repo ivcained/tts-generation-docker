@@ -39,6 +39,7 @@ target "default" {
     tags = ["${REGISTRY}/${REGISTRY_USER}/${APP}:${RELEASE}"]
     args = {
         RELEASE = "${RELEASE}"
+        BASE_IMAGE = "${BASE_IMAGE_REPOSITORY}:${BASE_IMAGE_VERSION}-cuda${CUDA_VERSION}-torch${TORCH_VERSION}"
         INDEX_URL = "https://download.pytorch.org/whl/cu${CU_VERSION}"
         TORCH_VERSION = "2.0.0+cu${CU_VERSION}"
         XFORMERS_VERSION = "0.0.19"
